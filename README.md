@@ -1,6 +1,6 @@
 # ONG Helper
 
-> Project made for Desenvolvimento web II at IFSP. 
+> Project made for Desenvolvimento web II at IFSP based on To be Hero from Rocketseat. 
 
 
 ## :computer: Technologies
