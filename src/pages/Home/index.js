@@ -1,9 +1,11 @@
 import React from "react";
+
 import {
   Container,
   OngHelperInfo,
   PageWrapper,
   FormWrapper,
+  InputWrapper,
   FormTitle,
   EmailInput,
   PasswordInput,
@@ -16,6 +18,9 @@ import {
   RegisterImage,
 } from "./styles.js";
 
+import HomeLogo from '../../assets/homeLogo.png';
+import RegisterLogo from '../../assets/VoltarregisterIcon.png';
+
 function App() {
   return (
     <PageWrapper>
@@ -24,18 +29,20 @@ function App() {
           <OngHelperSlogan>ONG Helper</OngHelperSlogan>
           <FormWrapper>
             <FormTitle>Entre com sua conta</FormTitle>
-            <EmailInput></EmailInput>
-            <PasswordInput></PasswordInput>
+            <InputWrapper>
+              <EmailInput placeholder="Email"></EmailInput>
+              <PasswordInput placeholder="Senha"></PasswordInput>
+            </InputWrapper>
             <RegisterWrapper>
               <RegisterButton>
-                <RegisterImage></RegisterImage>
+                <RegisterImage src={RegisterLogo}></RegisterImage>
                 <RegisterTitle>Não tenho cadastro</RegisterTitle>
               </RegisterButton>
             </RegisterWrapper>
             <LoginButton>Entrar</LoginButton>
           </FormWrapper>
         </OngHelperInfo>
-        <OngHelperImgage />
+        <OngHelperImgage src={HomeLogo}/>
       </Container>
     </PageWrapper>
   );
