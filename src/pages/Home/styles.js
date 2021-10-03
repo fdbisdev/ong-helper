@@ -39,7 +39,7 @@ export const FormTitle = styled.h1`
 export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 352px;
+  width: 420px;
   justify-content: space-between;
 `;
 
@@ -79,6 +79,7 @@ export const RegisterButton = styled.button`
   border: none;
   cursor: pointer;
   margin-top: 40px;
+  background-color: transparent;
 `;
 
 export const RegisterTitle = styled.h1`
@@ -89,7 +90,7 @@ export const RegisterTitle = styled.h1`
 
 export const LoginButton = styled.button`
   height: 60px;
-  width: 352px;
+  width: 420px;
   background-color: #E02041;
   color: #F0F0F5;
   font-family: 'Roboto', sans-serif;

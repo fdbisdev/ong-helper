@@ -20,13 +20,14 @@ import {
 
 import HomeLogo from '../../assets/homeLogo.png';
 import RegisterLogo from '../../assets/VoltarregisterIcon.png';
+import { Link } from "react-router-dom";
 
-function App() {
+function Home() {
   return (
     <PageWrapper>
       <Container>
         <OngHelperInfo>
-          <OngHelperSlogan>ONG Helper</OngHelperSlogan>
+          <OngHelperSlogan>ONG HELPER</OngHelperSlogan>
           <FormWrapper>
             <FormTitle>Entre com sua conta</FormTitle>
             <InputWrapper>
@@ -34,12 +35,16 @@ function App() {
               <PasswordInput placeholder="Senha"></PasswordInput>
             </InputWrapper>
             <RegisterWrapper>
-              <RegisterButton>
-                <RegisterImage src={RegisterLogo}></RegisterImage>
-                <RegisterTitle>Não tenho cadastro</RegisterTitle>
-              </RegisterButton>
+              <Link to="/register" style={{ textDecoration: 'none' }}>
+                <RegisterButton>
+                  <RegisterImage src={RegisterLogo}></RegisterImage>
+                  <RegisterTitle>Não tenho cadastro</RegisterTitle>
+                </RegisterButton>
+              </Link>
             </RegisterWrapper>
-            <LoginButton>Entrar</LoginButton>
+            <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+              <LoginButton>Entrar</LoginButton>
+            </Link>
           </FormWrapper>
         </OngHelperInfo>
         <OngHelperImgage src={HomeLogo}/>
@@ -48,4 +53,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
