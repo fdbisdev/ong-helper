@@ -1,5 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+
+import { handleRegisterUser } from '../../services/api'
 
 import {
     PageWrapper,
@@ -14,10 +16,10 @@ import {
     HomeBackImage,
     HomeBackTitle,
     InputRegister,
-    HaveOngCheckbox,
-    OngLocationWrapper,
-    OngCityInput,
-    OngStateInput,
+    // HaveOngCheckbox,
+    // OngLocationWrapper,
+    // OngCityInput,
+    // OngStateInput,
     RegisterButton,
     InputWrapper,
 } from './styles';
@@ -25,6 +27,30 @@ import {
 import HomeBackLogo from '../../assets/backImage.png'
 
 function Register(){
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [whatsapp, setWhatsapp] = useState('');       
+
+    const history =  useHistory();
+
+    async function handleOnSubmit(){
+        const paramsBody = {
+            email: email,
+            name: name,
+            password: password,
+            cellphone: whatsapp,
+        }
+        
+        try {
+            await handleRegisterUser(paramsBody);
+            history.push('/')
+        } catch (error) {
+            alert('Não foi possível realizar o cadastro');
+        }
+       
+    }
+
     return (
         <PageWrapper>
             <Container>
@@ -47,21 +73,19 @@ function Register(){
                     </RegisterInfo>
                     <RegisterFormsWrapper>
                         <InputWrapper>
-                            <InputRegister placeholder="Nome"/>
-                            <InputRegister placeholder="Senha"/>
-                            <InputRegister placeholder="Email"/>
-                            <InputRegister placeholder="Whatsapp"/>
-                            <HaveOngCheckbox />
+                            <InputRegister placeholder="Nome" onChange={event => setName(event.target.value)}/>
+                            <InputRegister type="password" placeholder="Senha" onChange={event => setPassword(event.target.value)}/>
+                            <InputRegister type="email" placeholder="Email" onChange={event => setEmail(event.target.value)}/>
+                            <InputRegister placeholder="Whatsapp" onChange={event => setWhatsapp(event.target.value)}/>
+                            {/* <HaveOngCheckbox />
                             <InputRegister placeholder="Nome da ONG"/>
-                            <InputRegister placeholder="Whatsapp da ONG"/>
+                            <InputRegister placeholder="Whatsapp da ONG"/> */}
                         </InputWrapper>
-                        <OngLocationWrapper>
+                        {/* <OngLocationWrapper>
                             <OngCityInput placeholder="Cidade"/>
                             <OngStateInput placeholder="UF"/>
-                        </OngLocationWrapper>
-                        <Link to="/" style={{ textDecoration: 'none' }}>
-                            <RegisterButton>Cadastrar</RegisterButton>
-                        </Link>
+                        </OngLocationWrapper> */}
+                        <RegisterButton onClick={handleOnSubmit}>Cadastrar</RegisterButton>
                     </RegisterFormsWrapper>
                 </RegisterInfoWrapper>
             </Container>

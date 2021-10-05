@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { handleLogin } from '../../services/api';
 
 import {
   Container,
@@ -20,9 +22,34 @@ import {
 
 import HomeLogo from '../../assets/homeLogo.png';
 import RegisterLogo from '../../assets/VoltarregisterIcon.png';
-import { Link } from "react-router-dom";
+
+import { Link, useHistory } from "react-router-dom";
 
 function Home() {
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+
+  const history =  useHistory();
+
+  async function handleOnSubmit(){  
+      const paramsBody = {
+          email: email,
+          password: password,
+      }
+      
+      try {
+        const response = await handleLogin(paramsBody);
+        history.push({
+          pathname: '/dashboard',
+          search: `?query=${response.data.access_token}`,
+          state: { detail: response.data }
+        });
+        
+      } catch (error) {
+         alert('Não foi possível realizar login');
+      }   
+  }
+
   return (
     <PageWrapper>
       <Container>
@@ -31,8 +58,8 @@ function Home() {
           <FormWrapper>
             <FormTitle>Entre com sua conta</FormTitle>
             <InputWrapper>
-              <EmailInput placeholder="Email"></EmailInput>
-              <PasswordInput placeholder="Senha"></PasswordInput>
+              <EmailInput placeholder="Email" onChange={event => setEmail(event.target.value)}></EmailInput>
+              <PasswordInput type="password" placeholder="Senha" onChange={event => setPassword(event.target.value)}></PasswordInput>
             </InputWrapper>
             <RegisterWrapper>
               <Link to="/register" style={{ textDecoration: 'none' }}>
@@ -42,9 +69,7 @@ function Home() {
                 </RegisterButton>
               </Link>
             </RegisterWrapper>
-            <Link to="/dashboard" style={{ textDecoration: 'none' }}>
-              <LoginButton>Entrar</LoginButton>
-            </Link>
+            <LoginButton onClick={handleOnSubmit}>Entrar</LoginButton>
           </FormWrapper>
         </OngHelperInfo>
         <OngHelperImgage src={HomeLogo}/>
