@@ -6,13 +6,14 @@ import { useHistory } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
+import Header from '../../components/Header';
+import ONGList from '../../components/ONGList';
+
 import {
     Container,
     ContainerTitle,
     LoadingWrapper,
 } from './styles';
-import Header from '../../components/Header';
-
 
 function Dashboard(){
     const [user, setUser] = useState('');
@@ -20,6 +21,8 @@ function Dashboard(){
 
     const location = useLocation();
     const history =  useHistory();
+
+    const mockedOngArrayList = ['ONU', 'DOG', 'APAD', 'IPAM', 'Abrinq', 'ONU', 'DOG', 'APAD', 'IPAM', 'Abrinq']
 
     function handleLogOut(){
         history.goBack();
@@ -32,8 +35,7 @@ function Dashboard(){
 
     return (
         <>
-        {
-            loading ?
+        { loading ?
             (
             <LoadingWrapper>
                 <Loader
@@ -43,15 +45,13 @@ function Dashboard(){
                     width={100}
                 />
             </LoadingWrapper>
-            )
-            :
-            (
+            ) : (
             <Container>
                 <Header user={user} handleLogOut={handleLogOut}/>
                 <ContainerTitle>ONG's Cadastradas</ContainerTitle>
+                <ONGList ongArrayList={mockedOngArrayList}/>
             </Container>
-            )
-        }
+            )}
         </>
     );
 }

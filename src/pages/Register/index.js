@@ -48,7 +48,6 @@ function Register(){
         } catch (error) {
             alert('Não foi possível realizar o cadastro');
         }
-       
     }
 
     return (
