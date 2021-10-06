@@ -57,8 +57,8 @@ export const GoToProfileButton = styled.button`
 
 export const LogOutWrapper = styled.div`
     justify-content: space-between;
-    width: 306px;
-    margin-right: 160px;
+    width: 500px;
+    margin-right: 90px;
     display: flex;
     margin-top: 32px;
 `;
