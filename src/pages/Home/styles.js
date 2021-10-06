@@ -46,6 +46,7 @@ export const InputWrapper = styled.div`
 export const EmailInput = styled.input`
   height: 40px;
   font-size: 18px;
+  font-family: 'Roboto', sans-serif;
   border-radius: 8px;
   padding: 8px;
   border: solid 1px #DCDCE5;
@@ -58,6 +59,7 @@ export const PasswordInput = styled.input`
   margin-top: 20px;
   height: 40px;
   font-size: 18px;
+  font-family: 'Roboto', sans-serif;
   border-radius: 8px;
   padding: 8px;
   border: solid 1px #DCDCE5;

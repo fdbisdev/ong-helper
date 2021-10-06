@@ -3,27 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useHistory } from "react-router-dom";
 
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import {
     Container,
-    Header,
-    OngHelperSlogan,
-    WelcomeProfile,
-    RegisterONGButton,
-    LogOutButton,
-    WelcomeProfileWrapper,
-    RightArrowBlack,
-    LogOutWrapper,
-    PowerImage,
-    GoToProfileButton,
     ContainerTitle,
     LoadingWrapper,
 } from './styles';
+import Header from '../../components/Header';
 
-import RightArrow from '../../assets/arrowrightblack.png'
-import LogOutPowerButton from '../../assets/power.png'
 
 function Dashboard(){
     const [user, setUser] = useState('');
@@ -38,7 +27,6 @@ function Dashboard(){
 
     useEffect(()=>{
         setUser(location.state.detail);
-        
         setLoading(false);
     },[location.state.detail])
 
@@ -59,17 +47,7 @@ function Dashboard(){
             :
             (
             <Container>
-                <Header>
-                    <WelcomeProfileWrapper>
-                        <OngHelperSlogan>ONG HELPER</OngHelperSlogan>
-                        <WelcomeProfile>Bem vindo(a), {user.name}</WelcomeProfile>
-                        <GoToProfileButton><RightArrowBlack src={RightArrow}/></GoToProfileButton>
-                    </WelcomeProfileWrapper>
-                    <LogOutWrapper>
-                        <RegisterONGButton>Cadastrar ONG</RegisterONGButton>
-                        <LogOutButton onClick={handleLogOut}><PowerImage src={LogOutPowerButton}/></LogOutButton>
-                    </LogOutWrapper>
-                </Header>
+                <Header user={user} handleLogOut={handleLogOut}/>
                 <ContainerTitle>ONG's Cadastradas</ContainerTitle>
             </Container>
             )
