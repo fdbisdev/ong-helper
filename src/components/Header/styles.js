@@ -9,12 +9,13 @@ export const HeaderWrapper = styled.div`
 
 export const OngHelperSlogan = styled.h1`
     color: #FF0404;
-    font-size: 36px;
+    font-size: 42px;
 `;
 
 export const WelcomeProfile = styled.h1`
     color: #13131A;
     font-size: 20px;
+    margin-left: 36px;
 `;
 
 export const RegisterONGButton = styled.button`
@@ -40,9 +41,9 @@ export const LogOutButton = styled.button`
 export const WelcomeProfileWrapper = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 480px;
-    margin-left: 96px;
+    justify-content: flex-start;
+    width: 100%;
+    margin-left: 90px;
     margin-top: 32px;
 `;
 
