@@ -1,15 +1,29 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 
 import {
     Container,
     ONGName,
+    ONGButtonNavigation,
 } from './styles';
 
-function ONGListElement({ ongName }){
+function ONGListElement({ ongName, user }){
+
+    const history =  useHistory();
+
+    function handleClickCard(){
+        history.push({
+            pathname: '/cases',
+            state: { detail: user, ongName: ongName }
+          });
+    }
+
     return (
-        <Container>
+    <Container>
+        <ONGButtonNavigation onClick={handleClickCard}>
             <ONGName>{ongName}</ONGName>
-        </Container>
+        </ONGButtonNavigation>
+    </Container>
     );
 }
 

@@ -5,6 +5,8 @@ import { Route, Switch } from 'react-router';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import EditingProfile from './pages/EditingProfile'
+import Cases from './pages/Cases';
 
 export function App(){
     return (
@@ -21,6 +23,15 @@ export function App(){
                 <Route path="/dashboard" exact>
                     <Dashboard/>
                 </Route>
+
+                <Route path="/editingProfile" exact>
+                    <EditingProfile/>
+                </Route>
+
+                <Route path="/cases" exact>
+                    <Cases/>
+                </Route>
+               
             </Switch>
         </Router>
     );
