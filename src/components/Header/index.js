@@ -24,6 +24,13 @@ function Header({ user, handleLogOut }){
 
     const history =  useHistory();
 
+    function handleClickAddOng(){
+        history.push({
+            pathname: '/addOng',
+            state: { detail: user }
+          });
+    }
+
     async function gotoProfileEdit(){
         // const paramsBody = {
         //     email: user.email,
@@ -57,7 +64,7 @@ function Header({ user, handleLogOut }){
                 
             </WelcomeProfileWrapper>
             <LogOutWrapper>
-                <RegisterONGButton>Cadastrar ONG</RegisterONGButton>
+                <RegisterONGButton onClick={handleClickAddOng}>Cadastrar ONG</RegisterONGButton>
                 <LogOutButton onClick={handleLogOut}><PowerImage src={LogOutPowerButton}/></LogOutButton>
             </LogOutWrapper>
         </HeaderWrapper>

@@ -37,15 +37,15 @@ function EditingProfile(){
     const history =  useHistory();
 
     async function handleOnEditingSubmit(){
-        const paramsBody = {
-            email: email,
-            name: name,
-            password: password,
-            cellphone: whatsapp,
-        }
+        // const paramsBody = {
+        //     email: email,
+        //     name: name,
+        //     password: password,
+        //     cellphone: whatsapp,
+        // }
         
         try {
-            await handleRegisterUser(paramsBody);
+            // await handleRegisterUser(paramsBody);
             history.push('/')
         } catch (error) {
             alert('Não foi possível realizar o cadastro');

@@ -18,20 +18,24 @@ import {
   OngHelperImgage,
   OngHelperSlogan,
   RegisterImage,
+  LoginButtonText,
 } from "./styles.js";
 
 import HomeLogo from '../../assets/homeLogo.png';
 import RegisterLogo from '../../assets/VoltarregisterIcon.png';
 
 import { Link, useHistory } from "react-router-dom";
+import Loader from "react-loader-spinner";
 
 function Home() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const history =  useHistory();
 
-  async function handleOnSubmit(){  
+  async function handleOnSubmit(){ 
+    setLoading(true);
       const paramsBody = {
           email: email,
           password: password,
@@ -47,7 +51,14 @@ function Home() {
         
       } catch (error) {
          alert('Não foi possível realizar login');
-      }   
+      }
+    setLoading(false);
+  }
+
+  function checkSubmit(e) {
+    if(e && e.key === "Enter") {
+      handleOnSubmit();
+    }
   }
 
   return (
@@ -59,9 +70,9 @@ function Home() {
             <FormTitle>Entre com sua conta</FormTitle>
             <InputWrapper>
               <EmailInput placeholder="Email" onChange={event => setEmail(event.target.value)}></EmailInput>
-              <PasswordInput type="password" placeholder="Senha" onChange={event => setPassword(event.target.value)}></PasswordInput>
+              <PasswordInput onKeyPress={(event) => checkSubmit(event)} type="password" placeholder="Senha" onChange={event => setPassword(event.target.value)}></PasswordInput>
             </InputWrapper>
-            <RegisterWrapper>
+            <RegisterWrapper >
               <Link to="/register" style={{ textDecoration: 'none' }}>
                 <RegisterButton>
                   <RegisterImage src={RegisterLogo}></RegisterImage>
@@ -69,7 +80,20 @@ function Home() {
                 </RegisterButton>
               </Link>
             </RegisterWrapper>
-            <LoginButton onClick={handleOnSubmit}>Entrar</LoginButton>
+            <LoginButton type="submit" onClick={handleOnSubmit}>
+              { 
+                loading ? (
+                  <Loader
+                    type="Oval"
+                    color="#FFF"
+                    height={20}
+                    width={20}
+                  />
+                )
+                :
+                (<LoginButtonText>Entrar</LoginButtonText>)
+              }
+            </LoginButton>
           </FormWrapper>
         </OngHelperInfo>
         <OngHelperImgage src={HomeLogo}/>

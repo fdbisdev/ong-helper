@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import EditingProfile from './pages/EditingProfile'
 import Cases from './pages/Cases';
+import AddONG from './pages/AddONG';
 
 export function App(){
     return (
@@ -30,6 +31,10 @@ export function App(){
 
                 <Route path="/cases" exact>
                     <Cases/>
+                </Route>
+
+                <Route path="/addong" exact>
+                    <AddONG />
                 </Route>
                
             </Switch>

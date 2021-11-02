@@ -111,3 +111,5 @@ export const OngHelperImgage = styled.img`
 export const RegisterImage = styled.img`
 
 `;
+
+export const LoginButtonText = styled.span``;
