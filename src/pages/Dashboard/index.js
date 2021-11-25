@@ -14,24 +14,45 @@ import {
     ContainerTitle,
     LoadingWrapper,
 } from './styles';
+import { hanldeGetAllONG, hanldeGetONG } from '../../services/api';
 
 function Dashboard(){
     const [user, setUser] = useState('');
+    const [allOngs, setAllOngs] = useState([]);
+    const [ong, setONG] = useState('');	
     const [loading, setLoading] = useState(true);
 
     const location = useLocation();
     const history =  useHistory();
 
-    const mockedOngArrayList = ['ONU', 'DOG', 'APAD', 'IPAM', 'Abrinq', 'ONU', 'DOG', 'APAD', 'IPAM', 'Abrinq']
-
     function handleLogOut(){
-        history.goBack();
+        history.push('/');
     }
 
     useEffect(()=>{
         setUser(location.state.detail);
-        setLoading(false);
-    },[location.state.detail])
+        const getAllONG = async () => {
+            try {
+                const response = await hanldeGetAllONG();
+                setAllOngs(response.ong);
+            } catch (error) {
+                alert('Erro ao carregar as informações da ONG!');
+            }
+        };
+        const getUserONG = async () => {
+            try {
+                const ongResponse = await hanldeGetONG(location.state.detail.access_token);
+                setONG(ongResponse);
+            } catch (error) {
+                alert('Erro ao carregar as informações da ONG!');
+            }
+        
+            setLoading(false);
+        };
+        
+        getAllONG();
+        getUserONG();
+    },[location.state.detail, user?.access_token])
 
     return (
         <>
@@ -47,9 +68,9 @@ function Dashboard(){
             </LoadingWrapper>
             ) : (
             <Container>
-                <Header user={user} handleLogOut={handleLogOut}/>
+                <Header ong={ong.ong} user={user} handleLogOut={handleLogOut}/>
                 <ContainerTitle>ONG's Cadastradas</ContainerTitle>
-                <ONGList ongArrayList={mockedOngArrayList} user={user}/>
+                <ONGList ongArrayList={allOngs} user={user}/>
             </Container>
             )}
         </>
