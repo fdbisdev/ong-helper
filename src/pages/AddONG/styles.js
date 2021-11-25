@@ -153,3 +153,4 @@ export const InputWrapper = styled.div`
   width: 100%;
 `;
 
+export const EditinginButtonText = styled.span``;
