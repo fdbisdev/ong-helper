@@ -6,4 +6,12 @@ export const Container = styled.ul`
     grid-gap: 20px;
     margin: 0 20px;
     margin-left: 56px;
+
+    @media (max-width: 1300px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 1100px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
 `;

@@ -16,6 +16,8 @@ export const RegisterInfoWrapper = styled.div`
   box-shadow:  10px 10px 120px #DCDCE5;
   height: 70%;
   justify-content: space-evenly;
+
+ 
 `;
 
 export const PageWrapper = styled.div`
@@ -50,6 +52,14 @@ export const RegisterFormsWrapper = styled.div`
   align-self: center;
   width: 470px;
   box-sizing: border-box;
+
+  @media (max-width: 1300px) {
+    width: 370px;
+  }
+
+  @media (max-width: 1100px) {
+    width: 270px;
+  }
 `;
 
 export const InfoTitle = styled.h1`
