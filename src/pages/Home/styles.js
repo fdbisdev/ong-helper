@@ -13,13 +13,33 @@ export const OngHelperInfo = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+
+  @media (max-width: 1000px) {
+    align-items: center;
+  }
 `;
 
 export const PageWrapper = styled.div`
   display: flex;
   flex: 1;
   margin: 0 auto;
-  max-width: 70%;
+  max-width: 80%;
+
+  @media (max-width: 1600px) {
+    max-width: 85%; 
+  }
+
+  @media (max-width: 1500px) {
+    max-width: 90%; 
+  }
+
+  @media (max-width: 1100px) {
+    max-width: 95%; 
+  }
+
+  @media (max-width: 800px) {
+    max-width: 95%; 
+  }
 `;
 
 export const OngHelperSlogan = styled.h1`
@@ -27,6 +47,10 @@ export const OngHelperSlogan = styled.h1`
   font-size: 70px;
   font-family: 'Roboto', sans-serif;
   margin-bottom: 100px;
+
+  @media (max-width: 440px) {
+    font-size: 60px;
+  }
 `;
 
 export const FormWrapper = styled.div``;
@@ -34,6 +58,10 @@ export const FormWrapper = styled.div``;
 export const FormTitle = styled.h1`
   font-size: 36px;
   font-family: 'Roboto', sans-serif;
+
+  @media (max-width: 440px) {
+    font-size: 24px;
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -41,6 +69,10 @@ export const InputWrapper = styled.div`
   flex-direction: column;
   width: 420px;
   justify-content: space-between;
+
+  @media (max-width: 440px) {
+    width: 320px;
+  }
 `;
 
 export const EmailInput = styled.input`
@@ -101,11 +133,24 @@ export const LoginButton = styled.button`
   border-radius: 8px;
   border: none;
   margin-top: 40px;
+
+  @media (max-width: 440px) {
+    width: 320px;
+  }
 `;
 
 export const OngHelperImgage = styled.img`
   height: 578px;
   width: 640px; 
+  
+  @media (max-width: 1240px) {
+    height: 478px;
+    width: 540px; 
+  }
+
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 export const RegisterImage = styled.img`

@@ -31,6 +31,18 @@ export const RegisterInfo = styled.div`
   display: flex;
   flex-direction: column;
   height: 560px;
+
+  @media (max-width: 1100px) {
+    width: 280px;  
+  }
+
+  @media (max-width: 800px) {
+    width: 180px;  
+  }
+
+  @media (max-width: 700px) {
+    width: 80px;  
+  }
 `;
 
 export const RegisterFormsWrapper = styled.div`
@@ -42,17 +54,37 @@ export const RegisterFormsWrapper = styled.div`
   align-self: center;
   width: 470px;
   box-sizing: border-box;
+
+  @media (max-width: 1300px) {
+    width: 370px;
+  }
+
+  @media (max-width: 1100px) {
+    width: 270px;  
+  }
+
+  @media (max-width: 700px) {
+    width: 170px;  
+  }
 `;
 
 export const InfoTitle = styled.h1`
   font-size: 36px;
   font-family: 'Roboto', sans-serif;
+
+  @media (max-width: 700px) {
+    font-size: 28px; 
+  }
 `;
 
 export const InfoDescription = styled.p`
   color: #737380;
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
+
+  @media (max-width: 700px) {
+    font-size: 14px;
+  }
 `;
 
 export const HomeBackWrapper = styled.div`
@@ -69,6 +101,8 @@ export const HomeBackButton = styled.button`
   margin-top: 164px;
   background-color: transparent;
   height: 40px;
+
+
 `;
 
 export const HomeBackImage = styled.img``;
@@ -77,6 +111,10 @@ export const HomeBackTitle = styled.h1`
   margin-left: 16px;
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
+
+  @media (max-width: 700px) {
+    font-size: 14px;
+  }
 `;
 
 export const InputRegister = styled.input`
