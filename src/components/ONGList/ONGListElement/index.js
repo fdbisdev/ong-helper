@@ -21,7 +21,7 @@ function ONGListElement({ ongName, user }){
     return (
     <Container>
         <ONGButtonNavigation onClick={handleClickCard}>
-            <ONGName>{ongName}</ONGName>
+            <ONGName>{ongName.name}</ONGName>
         </ONGButtonNavigation>
     </Container>
     );
