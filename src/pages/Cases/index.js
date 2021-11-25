@@ -16,6 +16,7 @@ import {
     LeftArrowBlack,
     CasesTitleWrapper,
 } from './styles';
+import CasesList from '../../components/CasesList';
 
 function Cases(){
     const [user, setUser] = useState('');
@@ -24,6 +25,9 @@ function Cases(){
 
     const location = useLocation();
     const history =  useHistory();
+
+    const mockedOngCasesList = ['Cadelinha atropelada', 'Doação de alimentos', 
+    'Arrecadação de roupas', 'Compra de ração para cachorrinhos']
 
     function handleLogOut(){
         history.goBack();
@@ -61,7 +65,7 @@ function Cases(){
                     </GoToDashboard>
                     <ContainerTitle>Casos cadastrados para {ongName}</ContainerTitle>
                 </CasesTitleWrapper>
-                
+                <CasesList ongCasesList={mockedOngCasesList}/>
             </Container>
             )}
             </>
