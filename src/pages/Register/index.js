@@ -41,11 +41,15 @@ function Register(){
             password: password,
             cellphone: whatsapp,
         }
-        
+
         try {
             await handleRegisterUser(paramsBody);
+
+            alert('Cadastro realizado com sucesso!');
+
             history.push('/')
         } catch (error) {
+            
             alert('Não foi possível realizar o cadastro');
         }
     }
