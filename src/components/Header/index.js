@@ -18,16 +18,13 @@ import LogOutPowerButton from '../../assets/power.png'
 
 import { useHistory } from 'react-router';
 
-
-
-function Header({ user, handleLogOut }){
-
+function Header({ user, handleLogOut, ong }){
     const history =  useHistory();
 
     function handleClickAddOng(){
         history.push({
             pathname: '/addOng',
-            state: { detail: user }
+            state: { detail: user, ong: ong }
           });
     }
 
@@ -41,11 +38,14 @@ function Header({ user, handleLogOut }){
         
         // try {
           //const response = await handleLogin(paramsBody);
-          history.push({
+         
+        history.push({
             pathname: '/editingProfile',
             search: `?query=${user.access_token}`,
+            
             state: { detail: user }
-          });
+            });
+         
           
         // } catch (error) {
         //    alert('Não foi possível realizar login');
@@ -64,7 +64,7 @@ function Header({ user, handleLogOut }){
                 
             </WelcomeProfileWrapper>
             <LogOutWrapper>
-                <RegisterONGButton onClick={handleClickAddOng}>Cadastrar ONG</RegisterONGButton>
+                <RegisterONGButton onClick={handleClickAddOng}>{ong.length > 0  ? 'Editar ONG' : 'Cadastrar ONG'}</RegisterONGButton>
                 <LogOutButton onClick={handleLogOut}><PowerImage src={LogOutPowerButton}/></LogOutButton>
             </LogOutWrapper>
         </HeaderWrapper>
