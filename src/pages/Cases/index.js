@@ -58,12 +58,12 @@ function Cases(){
             </LoadingWrapper>
             ) : (
             <Container>
-                <Header user={user} handleLogOut={handleLogOut}/>
+                <Header ong={ongName} user={user} handleLogOut={handleLogOut}/>
                 <CasesTitleWrapper>
                     <GoToDashboard onClick={handleGoToDashboard}>
                         <LeftArrowBlack src={LeftArrow}/>
                     </GoToDashboard>
-                    <ContainerTitle>Casos cadastrados para {ongName}</ContainerTitle>
+                    <ContainerTitle>Casos cadastrados para {ongName.name}</ContainerTitle>
                 </CasesTitleWrapper>
                 <CasesList ongCasesList={mockedOngCasesList}/>
             </Container>

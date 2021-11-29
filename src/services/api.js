@@ -40,5 +40,10 @@ export async function handleUpdateONG (token, id, params){
     api.defaults.headers.common.Authorization = `Bearer ${token}`
     const response  = await api.put(`/ong/${id}`, params)
     return response.data;
+}
 
+export async function handleEditProfile (token, params){
+    api.defaults.headers.common.Authorization = `Bearer ${token}`
+    const response  = await api.put(`/user`, params)
+    return response.data;
 }

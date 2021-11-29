@@ -27,26 +27,35 @@ import {
 import HomeBackLogo from '../../assets/backImage.png'
 
 function EditingProfile(){
-    const [name, setName] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [whatsapp, setWhatsapp] = useState('');
-    const [user, setUser] = useState('');
-
     const location = useLocation();
     const history =  useHistory();
 
+    const [name, setName] = useState(location.state.detail.name);
+    const [password, setPassword] = useState(location.state.detail.password);
+    const [email, setEmail] = useState(location.state.detail.email);
+    const [whatsapp, setWhatsapp] = useState(location.state.detail.cellphone);
+    const [userID, setUserID] = useState(location.state.detail.user_id);
+    const [user, setUser] = useState('');
+
+
     async function handleOnEditingSubmit(){
-        // const paramsBody = {
-        //     email: email,
-        //     name: name,
-        //     password: password,
-        //     cellphone: whatsapp,
-        // }
+        const paramsBody = {
+            id: userID,
+            email: email,
+            name: name,
+            password: password,
+            cellphone: whatsapp,
+        }
         
         try {
-            // await handleRegisterUser(paramsBody);
-            history.push('/')
+            await handleRegisterUser(paramsBody);
+            alert('Perfil atualizada com sucesso!');
+
+            history.push({
+                pathname: '/dashboard',
+                search: `?query=${user.access_token}`,
+                state: { detail: user }
+            });
         } catch (error) {
             alert('Não foi possível realizar o cadastro');
         }
@@ -54,18 +63,17 @@ function EditingProfile(){
 
     const  handleChangeInputValue = useCallback(() => {
         const inputName = document.getElementById("nome");
-        const inputPassword = document.getElementById("password");
         const inputEmail = document.getElementById("email");
         const inputWpp = document.getElementById("whatsapp");
 
         inputName.value = user.name;
-        inputPassword.value = user.password;
         inputEmail.value = user.email;
         inputWpp.value = user.cellphone;
     }, [user]);
 
     useEffect(()=>{
         setUser(location.state.detail);
+        setUserID(location.state.detail.user_id);
         handleChangeInputValue();
     },[handleChangeInputValue, location.state.detail])
 

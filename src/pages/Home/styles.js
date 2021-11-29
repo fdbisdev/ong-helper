@@ -103,6 +103,7 @@ export const PasswordInput = styled.input`
 export const RegisterWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 204px;
 `;
 
 export const RegisterButton = styled.button`

@@ -16,6 +16,11 @@ export const RegisterInfoWrapper = styled.div`
   box-shadow:  10px 10px 120px #DCDCE5;
   height: 70%;
   justify-content: space-evenly;
+
+  @media (max-width: 600px) {
+    box-shadow: none;   
+  }
+
 `;
 
 export const PageWrapper = styled.div`
@@ -23,6 +28,10 @@ export const PageWrapper = styled.div`
   flex: 1;
   margin: 0 auto;
   max-width: 70%;
+  
+  @media (max-width: 600px) {
+    max-width: 100%;    
+  }
 `;
 
 export const RegisterInfo = styled.div`
@@ -42,6 +51,10 @@ export const RegisterInfo = styled.div`
 
   @media (max-width: 700px) {
     width: 80px;  
+  }
+
+  @media (max-width: 600px) {
+    width: 30%;
   }
 `;
 
@@ -84,6 +97,10 @@ export const InfoDescription = styled.p`
 
   @media (max-width: 700px) {
     font-size: 14px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 18px;
   }
 `;
 

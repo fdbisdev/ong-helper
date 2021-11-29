@@ -20,6 +20,7 @@ import { useHistory } from 'react-router';
 
 function Header({ user, handleLogOut, ong }){
     const history =  useHistory();
+    console.log(ong)
 
     function handleClickAddOng(){
         history.push({
