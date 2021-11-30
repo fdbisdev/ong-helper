@@ -35,7 +35,6 @@ function CasesListElement({ currentCase }){
             alert('Caso deletado com sucesso!');
             
         } catch (error) {
-            console.log(error);
             alert('Não foi possível deletar o caso.');
         }
 

@@ -1,20 +1,18 @@
 import axios from "axios"
 
 const api = axios.create({
-    baseURL: "http://localhost:5000"
+    baseURL: "http://cec8-2804-14d-4488-b4f-f8e1-de-75c9-3667.ngrok.io"
 })
 
 api.defaults.headers.common.AcceptEncoding = 'gzip';
 
 export async function handleRegisterUser (params){
-    const apiURL = 'http://localhost:5000/user'
-    const response  = await axios.post(apiURL, params)
+    const response  = await api.post('/user', params)
     return response;
 }
 
 export async function handleLogin (params){
-    const apiURL = 'http://localhost:5000/token/json'
-    const response  = await axios.post(apiURL, params)
+    const response  = await api.post('/token/json', params)
     return response;
 }
 

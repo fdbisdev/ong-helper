@@ -35,10 +35,10 @@ function AddONG() {
 
     const [user, setUser] = useState('');
     const [loading, setLoading] = useState(false);
-    const [name, setName] = useState(location.state.ong[0].name || '');
-    const [city, setCity] = useState(location.state.ong[0].city || '');
-    const [state, setState] = useState(location.state.ong[0].state || '');
-    const [whatsapp, setWhatsapp] = useState(location.state.ong[0].phone || '');
+    const [name, setName] = useState(location.state.ong[0] ? location.state.ong[0].name : '');
+    const [city, setCity] = useState(location.state.ong[0] ? location.state.ong[0].city : '');
+    const [state, setState] = useState(location.state.ong[0] ? location.state.ong[0].state : '');
+    const [whatsapp, setWhatsapp] = useState(location.state.ong[0] ? location.state.ong[0].phone : '');
 
     const handleChangeInputValue = useCallback(async () => {
         const inputName = document.getElementById("ongName");
