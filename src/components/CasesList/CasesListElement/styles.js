@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const LoadingWrapper = styled.div`
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+`;
+
 export const Container = styled.li`
     background-color: #FFFFFF;
     align-items: flex-start;

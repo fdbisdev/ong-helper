@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Loader from 'react-loader-spinner';
 import CasesListElement from './CasesListElement';
+import { LoadingWrapper } from './CasesListElement/styles';
 
 import {
     Container
 } from './styles';
 
 function CasesList({ ongCasesList }){
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(false);
+    }, [ongCasesList]);
 
     if(ongCasesList.length === 0){
         return (
@@ -16,11 +23,27 @@ function CasesList({ ongCasesList }){
     }
 
     return (
+        <>
+        {loading ?
+        (
+            <LoadingWrapper>
+                <Loader
+                    type="Oval"
+                    color="#FF0404"
+                    height={100}
+                    width={100}
+                />
+            </LoadingWrapper>
+        )
+        :
+        (
         <Container>
             {ongCasesList.map((currentCase) => 
-                <CasesListElement currentCase={currentCase}/>
+            <CasesListElement currentCase={currentCase}/>
             )}
         </Container>
+        )}
+        </>
     );
 }
 

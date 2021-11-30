@@ -65,3 +65,16 @@ export async function handleGetUserInfo (token){
     const response  = await api.get(`/user`)
     return response.data;
 };
+
+export async function handleDeleteCase (caseID, token){
+    api.defaults.headers.common.Authorization = `Bearer ${token}`
+    const response  = await api.delete(`/action?id=${caseID}`)
+    return response.data;
+}
+
+export async function handleUpdateCases (token, caseID, params){
+    api.defaults.headers.common.Authorization = `Bearer ${token}`
+    const response  = await api.post(`/action/update/${caseID}`, params)
+    return response.data;
+}
+

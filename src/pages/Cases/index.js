@@ -14,6 +14,7 @@ import {
     LeftArrowBlack,
     CasesTitleWrapper,
 } from './styles';
+
 import CasesList from '../../components/CasesList';
 import { handleGetCasesInfo } from '../../services/api';
 import CasesHeader from '../../components/CasesHeader';
@@ -33,12 +34,12 @@ function Cases(){
                 const responseInfoCases = await handleGetCasesInfo(location.state.access_token, ongName.ong_id);
                 setCaseInfo(responseInfoCases.ong);
 
-            } catch ({error}) {
-                
+            } catch (error) {
+                alert('Erro ao carregar casos');
             }
         }
         handleGetCases();
-    }, [location.state.access_token, ongName.id, ongName.ong_id]);
+    }, [caseInfo, location.state.access_token, ongName.id, ongName.ong_id]);
 
     function handleLogOut(){
         history.push('/');

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { 
     PageWrapper,
@@ -26,7 +26,7 @@ import {
 import HomeBackLogo from '../../assets/backImage.png'
 import Loader from "react-loader-spinner";
 import { useHistory, useLocation } from 'react-router';
-import { handleAddCases } from '../../services/api';
+import { handleAddCases, handleUpdateCases } from '../../services/api';
 
 function AddCases (){
     const history =  useHistory();
@@ -35,32 +35,66 @@ function AddCases (){
     const [loading, setLoading] = useState(false);
     const [ong, setOng] = useState(location.state.ong);
     const [user, setUser] = useState(location.state.detail);
-    const [caseTitle, setCaseTitle] = useState('');
-    const [caseDescription, setCaseDescription] = useState('');
-    const [caseActualPrice, setCaseActualPrice] = useState('');
-    const [caseValue, setCaseValue] = useState('');
+    const [currentCase, setCurrentCase] = useState(!!location.state.case ? location.state.case : '');
+    const [caseTitle, setCaseTitle] = useState(!!location.state.case ? location.state.case.name : '');
+    const [caseDescription, setCaseDescription] = useState(!!location.state.case ? location.state.case.description : '');
+    const [caseActualPrice, setCaseActualPrice] = useState(!!location.state.case ? location.state.case.current_money : '');
+    const [caseValue, setCaseValue] = useState(!!location.state.case ? location.state.case.goal : '');
+
+    const handleChangeInputValue = useCallback(async () => {
+        const inputTitle = document.getElementById("title");
+        const inputDescription = document.getElementById("description");
+        const inputValueNow = document.getElementById("valorNow");
+        const inputValueGoal = document.getElementById("valorMeta");
+
+        inputTitle.value = location.state.case.name;
+        inputDescription.value = location.state.case.description;
+        inputValueNow.value = location.state.case.current_money;
+        inputValueGoal.value = location.state.case.goal;
+    
+    }, [location.state.case]);
 
     async function handleAddNewCase(){
         setLoading(true);
-        try {
-            const paramsBody = {
-                name: caseTitle,
-                description: caseDescription,
-                goal: Number(caseValue),
-                current_money: Number(caseActualPrice),
-                ong_id: ong.ong_id,
-            };
 
-            await handleAddCases(location.state.access_token, paramsBody);
-            alert('Caso cadastrado com sucesso!');
+        const paramsBody = {
+            name: caseTitle,
+            description: caseDescription,
+            goal: Number(caseValue),
+            current_money: Number(caseActualPrice),
+            ong_id: ong.ong_id,
+        };
 
-            history.push({
-                pathname: '/cases',
-                state: { detail: user, ongName: ong, access_token: location.state.access_token }
-            });
-            
-        } catch (error) {
-            alert('Não foi possível cadastrar o caso');
+        if(!!location.state.case){
+            try{
+                await handleUpdateCases(location.state.access_token, location.state.case.case_id, paramsBody);
+                alert('Caso cadastrado com sucesso!');
+
+                history.push({
+                    pathname: '/cases',
+                    state: { detail: user, ongName: ong, access_token: location.state.access_token }
+                });
+
+            }
+            catch (error) {
+                alert('Não foi possível atualizar o caso');
+            }
+
+        }
+        else{
+            try {
+    
+                await handleAddCases(location.state.access_token, paramsBody);
+                alert('Caso cadastrado com sucesso!');
+    
+                history.push({
+                    pathname: '/cases',
+                    state: { detail: user, ongName: ong, access_token: location.state.access_token }
+                });
+                
+            } catch (error) {
+                alert('Não foi possível cadastrar o caso');
+            }
         }
 
         setLoading(false);
@@ -69,7 +103,12 @@ function AddCases (){
     useEffect(() => {
         setOng(location.state.ong);
         setUser(location.state.detail);
-    },[location.state.detail, location.state.ong]);
+
+        if(!!location.state.case){
+            handleChangeInputValue();
+            setCurrentCase(location.state.case);
+        }
+    },[handleChangeInputValue, location.state.case, location.state.detail, location.state.ong]);
 
     function handleBackPress(){
         history.goBack();
@@ -81,7 +120,7 @@ function AddCases (){
             <RegisterInfoWrapper>
             <RegisterInfo>
                     <InfoTitle>
-                        Cadastrar novo caso
+                        {!!currentCase ? 'Editar caso' : 'Cadastrar novo caso' }
                     </InfoTitle>
                     <InfoDescription>
                         Descreva o caso detalhadamente para encontrar um herói para resolver isso.
