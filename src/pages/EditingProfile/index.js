@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
-import { handleRegisterUser } from '../../services/api'
+import { handleEditProfile } from '../../services/api'
 
 import {
     PageWrapper,
@@ -37,7 +37,6 @@ function EditingProfile(){
     const [userID, setUserID] = useState(location.state.detail.user_id);
     const [user, setUser] = useState('');
 
-
     async function handleOnEditingSubmit(){
         const paramsBody = {
             id: userID,
@@ -48,16 +47,16 @@ function EditingProfile(){
         }
         
         try {
-            await handleRegisterUser(paramsBody);
+            await handleEditProfile(location.state.access_token, paramsBody, userID);
             alert('Perfil atualizada com sucesso!');
 
             history.push({
                 pathname: '/dashboard',
-                search: `?query=${user.access_token}`,
-                state: { detail: user }
+                search: `?query=${location.state.access_token}`,
+                state: { detail: user, access_token: location.state.access_token }
             });
         } catch (error) {
-            alert('Não foi possível realizar o cadastro');
+            alert('Não foi possível atualizar o cadastro');
         }
     }
 
@@ -74,6 +73,7 @@ function EditingProfile(){
     useEffect(()=>{
         setUser(location.state.detail);
         setUserID(location.state.detail.user_id);
+
         handleChangeInputValue();
     },[handleChangeInputValue, location.state.detail])
 

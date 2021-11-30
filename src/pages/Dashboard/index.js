@@ -14,16 +14,17 @@ import {
     ContainerTitle,
     LoadingWrapper,
 } from './styles';
-import { hanldeGetAllONG, hanldeGetONG } from '../../services/api';
+import { handleGetUserInfo, hanldeGetAllONG, hanldeGetONG } from '../../services/api';
 
 function Dashboard(){
+    const location = useLocation();
+    const history =  useHistory();
+
     const [user, setUser] = useState('');
     const [allOngs, setAllOngs] = useState([]);
     const [ong, setONG] = useState('');	
     const [loading, setLoading] = useState(true);
-
-    const location = useLocation();
-    const history =  useHistory();
+    const [acessToken, setAcessToken] = useState(location.state.access_token ? location.state.access_token : location.state.detail.access_token);
 
     function handleLogOut(){
         history.push('/');
@@ -41,7 +42,7 @@ function Dashboard(){
         };
         const getUserONG = async () => {
             try {
-                const ongResponse = await hanldeGetONG(location.state.detail.access_token);
+                const ongResponse = await hanldeGetONG(acessToken);
                 setONG(ongResponse);
             } catch (error) {
                 alert('Erro ao carregar as informações da ONG!');
@@ -49,10 +50,27 @@ function Dashboard(){
         
             setLoading(false);
         };
+
+        if(location.state.access_token){
+            setAcessToken(location.state.access_token);
+        }
+
+        const getAllUserInfo = async () => {
+            try {
+                const userResponse = await handleGetUserInfo(acessToken);
+                setUser(userResponse.user.UserModel);
+            }
+            catch (error) {
+                alert('Erro ao carregar as informações do usuário!');
+            }
+        };
         
         getAllONG();
+        getAllUserInfo();
         getUserONG();
-    },[location.state.detail, user?.access_token])
+
+        
+    },[acessToken, location.state.access_token, location.state.detail])
 
     return (
         <>
@@ -68,9 +86,9 @@ function Dashboard(){
             </LoadingWrapper>
             ) : (
             <Container>
-                <Header ong={ong.ong} user={user} handleLogOut={handleLogOut}/>
+                <Header acessToken={acessToken} ong={ong.ong} user={user} handleLogOut={handleLogOut}/>
                 <ContainerTitle>ONG's Cadastradas</ContainerTitle>
-                <ONGList ongArrayList={allOngs} user={user}/>
+                <ONGList acessToken={acessToken} ongArrayList={allOngs} user={user}/>
             </Container>
             )}
         </>

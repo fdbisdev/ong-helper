@@ -18,11 +18,12 @@ import LogOutPowerButton from '../../assets/power.png'
 
 import { useHistory } from 'react-router';
 
-function Header({ user, handleLogOut, ong,  acessToken}){
+function CasesHeader({ user, handleLogOut, ong, acessToken }){
     const history =  useHistory();
-    function handleClickAddOng(){
+
+    function handleClickAddCases(){
         history.push({
-            pathname: '/addOng',
+            pathname: '/addCases',
             state: { detail: user, ong: ong, access_token: acessToken }
           });
     }
@@ -48,11 +49,11 @@ function Header({ user, handleLogOut, ong,  acessToken}){
                 
             </WelcomeProfileWrapper>
             <LogOutWrapper>
-                <RegisterONGButton onClick={handleClickAddOng}>{ong.length > 0  ? 'Editar ONG' : 'Cadastrar ONG'}</RegisterONGButton>
+                <RegisterONGButton onClick={handleClickAddCases}>Cadastrar novo caso</RegisterONGButton>
                 <LogOutButton onClick={handleLogOut}><PowerImage src={LogOutPowerButton}/></LogOutButton>
             </LogOutWrapper>
         </HeaderWrapper>
     );
 }
 
-export default Header;
+export default CasesHeader;

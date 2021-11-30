@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import EditingProfile from './pages/EditingProfile'
 import Cases from './pages/Cases';
 import AddONG from './pages/AddONG';
+import AddCases from './pages/AddCases';
 
 export function App(){
     return (
@@ -36,7 +37,11 @@ export function App(){
                 <Route path="/addong" exact>
                     <AddONG />
                 </Route>
-               
+
+                <Route path="/addCases">
+                    <AddCases />
+                </Route>
+
             </Switch>
         </Router>
     );

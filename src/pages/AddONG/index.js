@@ -65,13 +65,13 @@ function AddONG() {
 
         if(location.state.ong.length > 0){
             try {
-                await handleUpdateONG(user?.access_token, location.state.ong[0].ong_id, paramsBody);
+                await handleUpdateONG(location.state.access_token, location.state.ong[0].ong_id, paramsBody);
                 alert('ONG Atualizada com sucesso!');
 
                 history.push({
                     pathname: '/dashboard',
-                    search: `?query=${user.access_token}`,
-                    state: { detail: user }
+                    search: `?query=${location.state.access_token}`,
+                    state: { detail: user, access_token: location.state.access_token }
                 });
                 
             } catch (error) {
@@ -80,13 +80,13 @@ function AddONG() {
         }
         else{
             try {
-                await hanldeCreateONG(paramsBody, user?.access_token);
+                await hanldeCreateONG(paramsBody, location.state.access_token);
                 alert('ONG Cadastrada com sucesso!');
     
                 history.push({
                     pathname: '/dashboard',
-                    search: `?query=${user.access_token}`,
-                    state: { detail: user }
+                    search: `?query=${location.state.access_token}`,
+                    state: { detail: user, access_token: location.state.access_token }
                 });
             } catch (error) {
                 alert('Não foi possível cadastrar a ONG');

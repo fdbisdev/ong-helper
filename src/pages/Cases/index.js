@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 
-import Header from '../../components/Header';
-
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
@@ -17,20 +15,33 @@ import {
     CasesTitleWrapper,
 } from './styles';
 import CasesList from '../../components/CasesList';
+import { handleGetCasesInfo } from '../../services/api';
+import CasesHeader from '../../components/CasesHeader';
 
 function Cases(){
-    const [user, setUser] = useState('');
-    const [ongName, setOngName] = useState('');
-    const [loading, setLoading] = useState(true);
-
     const location = useLocation();
     const history =  useHistory();
 
-    const mockedOngCasesList = ['Cadelinha atropelada', 'Doação de alimentos', 
-    'Arrecadação de roupas', 'Compra de ração para cachorrinhos']
+    const [user, setUser] = useState(location.state.detail);
+    const [ongName, setOngName] = useState(location.state.ongName);
+    const [loading, setLoading] = useState(true);
+    const [caseInfo, setCaseInfo] = useState([]);
+
+    useEffect(() => {
+        async function handleGetCases(){
+            try {
+                const responseInfoCases = await handleGetCasesInfo(location.state.access_token, ongName.ong_id);
+                setCaseInfo(responseInfoCases.ong);
+
+            } catch ({error}) {
+                
+            }
+        }
+        handleGetCases();
+    }, [location.state.access_token, ongName.id, ongName.ong_id]);
 
     function handleLogOut(){
-        history.goBack();
+        history.push('/');
     }
 
     function handleGoToDashboard(){
@@ -41,7 +52,7 @@ function Cases(){
         setUser(location.state.detail);
         setOngName(location.state.ongName);
         setLoading(false);
-    },[location.state.detail, location.state.ongName])
+    },[location.state.acessToken, location.state.detail, location.state.ongName])
 
     
     return (
@@ -58,17 +69,17 @@ function Cases(){
             </LoadingWrapper>
             ) : (
             <Container>
-                <Header ong={ongName} user={user} handleLogOut={handleLogOut}/>
+                <CasesHeader acessToken={location.state.access_token} ong={ongName} user={user} handleLogOut={handleLogOut}/>
                 <CasesTitleWrapper>
                     <GoToDashboard onClick={handleGoToDashboard}>
                         <LeftArrowBlack src={LeftArrow}/>
                     </GoToDashboard>
                     <ContainerTitle>Casos cadastrados para {ongName.name}</ContainerTitle>
                 </CasesTitleWrapper>
-                <CasesList ongCasesList={mockedOngCasesList}/>
+                <CasesList ongCasesList={caseInfo}/>
             </Container>
             )}
-            </>
+        </>
     );
 }
 

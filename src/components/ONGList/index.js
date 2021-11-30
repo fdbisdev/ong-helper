@@ -5,11 +5,11 @@ import {
     Container
 } from './styles';
 
-function ONGList({ ongArrayList, user }){
+function ONGList({ ongArrayList, user, acessToken }){
     return (
         <Container>
             {ongArrayList.map((currentONG) => 
-                <ONGListElement user={user} ongName={currentONG}/>
+                <ONGListElement acessToken={acessToken} user={user} ongName={currentONG}/>
             )}
         </Container>
     );

@@ -38,12 +38,30 @@ export async function hanldeGetAllONG (token){
 
 export async function handleUpdateONG (token, id, params){
     api.defaults.headers.common.Authorization = `Bearer ${token}`
-    const response  = await api.put(`/ong/${id}`, params)
+    const response  = await api.post(`/ong/update/${id}`, params)
     return response.data;
 }
 
-export async function handleEditProfile (token, params){
+export async function handleEditProfile (token, params, userID){
     api.defaults.headers.common.Authorization = `Bearer ${token}`
-    const response  = await api.put(`/user`, params)
+    const response  = await api.post(`/user/update/${userID}`, params)
     return response.data;
 }
+
+export async function handleGetCasesInfo (token, ongID){
+    api.defaults.headers.common.Authorization = `Bearer ${token}`
+    const response  = await api.get(`/ong/action/${ongID}`)
+    return response.data;
+}
+
+export async function handleAddCases (token, params){
+    api.defaults.headers.common.Authorization = `Bearer ${token}`
+    const response  = await api.post(`/action`, params)
+    return response.data;
+};
+
+export async function handleGetUserInfo (token){
+    api.defaults.headers.common.Authorization = `Bearer ${token}`
+    const response  = await api.get(`/user`)
+    return response.data;
+};

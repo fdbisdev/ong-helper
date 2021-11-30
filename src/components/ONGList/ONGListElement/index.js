@@ -7,14 +7,14 @@ import {
     ONGButtonNavigation,
 } from './styles';
 
-function ONGListElement({ ongName, user }){
+function ONGListElement({ ongName, user, acessToken }){
 
     const history =  useHistory();
 
     function handleClickCard(){
         history.push({
             pathname: '/cases',
-            state: { detail: user, ongName: ongName }
+            state: { detail: user, ongName: ongName, access_token: acessToken }
           });
     }
 
